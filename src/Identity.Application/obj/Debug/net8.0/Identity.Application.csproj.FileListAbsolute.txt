@@ -1,0 +1,15 @@
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Application\bin\Debug\net8.0\Identity.Application.deps.json
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Application\bin\Debug\net8.0\Identity.Application.dll
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Application\bin\Debug\net8.0\Identity.Application.pdb
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Application\bin\Debug\net8.0\Identity.Domain.dll
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Application\bin\Debug\net8.0\Identity.Domain.pdb
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Application\obj\Debug\net8.0\Identity.Application.csproj.AssemblyReference.cache
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Application\obj\Debug\net8.0\Identity.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Application\obj\Debug\net8.0\Identity.Application.AssemblyInfoInputs.cache
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Application\obj\Debug\net8.0\Identity.Application.AssemblyInfo.cs
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Application\obj\Debug\net8.0\Identity.Application.csproj.CoreCompileInputs.cache
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Application\obj\Debug\net8.0\Identity.59D253F8.Up2Date
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Application\obj\Debug\net8.0\Identity.Application.dll
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Application\obj\Debug\net8.0\refint\Identity.Application.dll
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Application\obj\Debug\net8.0\Identity.Application.pdb
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Application\obj\Debug\net8.0\ref\Identity.Application.dll

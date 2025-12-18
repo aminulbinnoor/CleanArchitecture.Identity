@@ -1,0 +1,799 @@
+{
+  "info": {
+    "_postman_id": "identity-server-api",
+    "name": "Identity Server API",
+    "description": "Complete Identity Server with Authentication, Authorization, Role-Based Access Control and Permissions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "1. Register New User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"Password123\",\n  \"confirmPassword\": \"Password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "register"]
+            },
+            "description": "Register a new user account"
+          },
+          "response": []
+        },
+        {
+          "name": "2. Login User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"Admin@123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            },
+            "description": "Login with email and password. Returns JWT tokens."
+          },
+          "response": []
+        },
+        {
+          "name": "3. Refresh Access Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accessToken\": \"{{access_token}}\",\n  \"refreshToken\": \"{{refresh_token}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/refresh-token",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "refresh-token"]
+            },
+            "description": "Get new access token using refresh token"
+          },
+          "response": []
+        },
+        {
+          "name": "4. Logout (Single Device)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Refresh-Token",
+                "value": "{{refresh_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/logout",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "logout"]
+            },
+            "description": "Logout from current device"
+          },
+          "response": []
+        },
+        {
+          "name": "5. Logout All Devices",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"logoutAllDevices\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/logout",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "logout"]
+            },
+            "description": "Logout from all devices"
+          },
+          "response": []
+        },
+        {
+          "name": "6. Validate Token",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/auth/validate-token",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "validate-token"]
+            },
+            "description": "Validate current JWT token"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User Management",
+      "item": [
+        {
+          "name": "1. Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/users/me",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users", "me"]
+            },
+            "description": "Get information of currently logged in user"
+          },
+          "response": []
+        },
+        {
+          "name": "2. Get All Users (Admin Only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/users",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users"]
+            },
+            "description": "Get all users (requires Admin role)"
+          },
+          "response": []
+        },
+        {
+          "name": "3. Get User By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/users/{{user_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users", "{{user_id}}"]
+            },
+            "description": "Get user details by ID (requires Admin role)"
+          },
+          "response": []
+        },
+        {
+          "name": "4. Update User Roles",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roles\": [\"User\", \"Manager\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users/{{user_id}}/roles",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users", "{{user_id}}", "roles"]
+            },
+            "description": "Update roles for a user (requires Admin role)"
+          },
+          "response": []
+        },
+        {
+          "name": "5. Search Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/users/search?term=john&page=1&pageSize=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users", "search"],
+              "query": [
+                {
+                  "key": "term",
+                  "value": "john"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Search users with pagination"
+          },
+          "response": []
+        },
+        {
+          "name": "6. Get User Statistics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/users/stats",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users", "stats"]
+            },
+            "description": "Get user statistics dashboard"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Role Management",
+      "item": [
+        {
+          "name": "1. Get All Roles",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/roles",
+              "host": ["{{base_url}}"],
+              "path": ["api", "roles"]
+            },
+            "description": "Get all roles (Admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "2. Get Role By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/roles/{{role_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "roles", "{{role_id}}"]
+            },
+            "description": "Get role by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "3. Create New Role",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Supervisor\",\n  \"description\": \"Team supervisor role\",\n  \"permissions\": [\"users.read\", \"users.update\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/roles",
+              "host": ["{{base_url}}"],
+              "path": ["api", "roles"]
+            },
+            "description": "Create a new role"
+          },
+          "response": []
+        },
+        {
+          "name": "4. Update Role",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Updated role description\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/roles/{{role_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "roles", "{{role_id}}"]
+            },
+            "description": "Update role information"
+          },
+          "response": []
+        },
+        {
+          "name": "5. Assign Permissions to Role",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"permissions\": [\"users.read\", \"users.create\", \"users.update\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/roles/{{role_id}}/permissions",
+              "host": ["{{base_url}}"],
+              "path": ["api", "roles", "{{role_id}}", "permissions"]
+            },
+            "description": "Assign permissions to a role"
+          },
+          "response": []
+        },
+        {
+          "name": "6. Delete Role",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/roles/{{role_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "roles", "{{role_id}}"]
+            },
+            "description": "Delete a role (if no users assigned)"
+          },
+          "response": []
+        },
+        {
+          "name": "7. Get All Permissions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/roles/permissions",
+              "host": ["{{base_url}}"],
+              "path": ["api", "roles", "permissions"]
+            },
+            "description": "Get all available permissions"
+          },
+          "response": []
+        },
+        {
+          "name": "8. Get Users by Role",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/roles/Admin/users",
+              "host": ["{{base_url}}"],
+              "path": ["api", "roles", "Admin", "users"]
+            },
+            "description": "Get all users with specific role"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Permission Management",
+      "item": [
+        {
+          "name": "1. Get All Permissions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/permissions",
+              "host": ["{{base_url}}"],
+              "path": ["api", "permissions"]
+            },
+            "description": "Get all system permissions"
+          },
+          "response": []
+        },
+        {
+          "name": "2. Create Permission",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"products.delete\",\n  \"description\": \"Delete products\",\n  \"category\": \"Products\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/permissions",
+              "host": ["{{base_url}}"],
+              "path": ["api", "permissions"]
+            },
+            "description": "Create new permission"
+          },
+          "response": []
+        },
+        {
+          "name": "3. Update Permission",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Updated permission description\",\n  \"category\": \"Updated Category\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/permissions/{{permission_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "permissions", "{{permission_id}}"]
+            },
+            "description": "Update permission details"
+          },
+          "response": []
+        },
+        {
+          "name": "4. Delete Permission",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/permissions/{{permission_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "permissions", "{{permission_id}}"]
+            },
+            "description": "Delete permission"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Test Endpoints",
+      "item": [
+        {
+          "name": "1. Test Authentication",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/auth/test",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "test"]
+            },
+            "description": "Test if authentication works"
+          },
+          "response": []
+        },
+        {
+          "name": "2. Test Admin Role",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/auth/test-admin",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "test-admin"]
+            },
+            "description": "Test Admin role access"
+          },
+          "response": []
+        },
+        {
+          "name": "3. Test Manager Role",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{manager_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/auth/test-manager",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "test-manager"]
+            },
+            "description": "Test Manager role access"
+          },
+          "response": []
+        },
+        {
+          "name": "4. Test User Role",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{user_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/auth/test-user",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "test-user"]
+            },
+            "description": "Test User role access"
+          },
+          "response": []
+        },
+        {
+          "name": "5. Test Specific Permission",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/auth/test-permission/users.read",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "test-permission", "users.read"]
+            },
+            "description": "Test specific permission"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Utility Endpoints",
+      "item": [
+        {
+          "name": "1. Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            },
+            "description": "Check API health status"
+          },
+          "response": []
+        },
+        {
+          "name": "2. API Information",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/",
+              "host": ["{{base_url}}"],
+              "path": [""]
+            },
+            "description": "Get API information and endpoints"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5259",
+      "type": "string"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string",
+      "description": "Regular user access token"
+    },
+    {
+      "key": "refresh_token",
+      "value": "",
+      "type": "string",
+      "description": "Refresh token"
+    },
+    {
+      "key": "admin_token",
+      "value": "",
+      "type": "string",
+      "description": "Admin user access token"
+    },
+    {
+      "key": "manager_token",
+      "value": "",
+      "type": "string",
+      "description": "Manager user access token"
+    },
+    {
+      "key": "user_token",
+      "value": "",
+      "type": "string",
+      "description": "Regular user access token"
+    },
+    {
+      "key": "user_id",
+      "value": "",
+      "type": "string",
+      "description": "User ID for testing"
+    },
+    {
+      "key": "role_id",
+      "value": "",
+      "type": "string",
+      "description": "Role ID for testing"
+    },
+    {
+      "key": "permission_id",
+      "value": "",
+      "type": "string",
+      "description": "Permission ID for testing"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "console.log('Request to:', pm.request.url);"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.test(\"Status code is 200\", function () {",
+          "    pm.response.to.have.status(200);",
+          "});",
+          "",
+          "// For login response, save tokens",
+          "if (pm.request.url.toString().includes('/api/auth/login')) {",
+          "    var jsonData = pm.response.json();",
+          "    pm.environment.set(\"access_token\", jsonData.accessToken);",
+          "    pm.environment.set(\"refresh_token\", jsonData.refreshToken);",
+          "    pm.environment.set(\"user_id\", jsonData.user.id);",
+          "}"
+        ]
+      }
+    }
+  ]
+}

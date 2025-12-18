@@ -1,0 +1,12 @@
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Domain\bin\Debug\net8.0\Identity.Domain.deps.json
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Domain\bin\Debug\net8.0\Identity.Domain.dll
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Domain\bin\Debug\net8.0\Identity.Domain.pdb
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Domain\obj\Debug\net8.0\Identity.Domain.csproj.AssemblyReference.cache
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Domain\obj\Debug\net8.0\Identity.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Domain\obj\Debug\net8.0\Identity.Domain.AssemblyInfoInputs.cache
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Domain\obj\Debug\net8.0\Identity.Domain.AssemblyInfo.cs
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Domain\obj\Debug\net8.0\Identity.Domain.csproj.CoreCompileInputs.cache
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Domain\obj\Debug\net8.0\Identity.Domain.dll
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Domain\obj\Debug\net8.0\refint\Identity.Domain.dll
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Domain\obj\Debug\net8.0\Identity.Domain.pdb
+D:\laragon\www\DotNet\CleanArchitecture.Identity\src\Identity.Domain\obj\Debug\net8.0\ref\Identity.Domain.dll
