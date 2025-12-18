@@ -134,9 +134,6 @@ curl -X GET "https://localhost:5001/api/users" \
 }
 ```
 
-
-
-
 Your identity server is now complete and ready to use! The API provides full authentication, authorization, role-based permissions, and user management capabilities.
 
 ### **1. Get All Roles**
@@ -465,6 +462,10 @@ GET /api/roles/name/Manager
 ---
 
 ## **📊 Database Seeding (Default Roles & Permissions)**
+
+# Tabble Migrate command
+
+dotnet ef database update --project src/Identity.Infrastructure --startup-project src/Identity.API --context ApplicationDbContext
 
 ### **Update SeedData.cs to add more roles:**
 
